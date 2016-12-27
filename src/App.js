@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScrollerWrapper from '../lib/scroller-wrapper';
+import ScrollerContainer from '../lib/scroller-container';
 import logo from './logo.svg';
 import './App.css';
 
@@ -26,9 +26,11 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <ScrollerWrapper className="scroller">
-          Foobar
-        </ScrollerWrapper>
+        <div className="container">
+          <ScrollerContainer className="scroller">
+            Foobar
+          </ScrollerContainer>
+        </div>
       </div>
     );
   }
