@@ -29,7 +29,7 @@ class App extends Component {
         </p>
         <div className="container">
           <CarouselScroller className="scroller">
-            {_.range(1,10).map(nr => (
+            {_.range(1, 10).map(nr => (
               <div key={nr} className="scroller-item">{nr}</div>
             ))}
           </CarouselScroller>
