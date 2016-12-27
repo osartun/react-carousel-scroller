@@ -91,10 +91,22 @@ class App extends Component {
           <CarouselScroller
             index={this.state.index}
             onChange={this.onChange}
-            className="scroller"
+            className="scroller-vertical"
             orientation="y"
           >
             {_.range(1, 10).map(nr => (
+              <div key={nr} className="scroller-item-3">{nr}</div>
+            ))}
+          </CarouselScroller>
+        </div>
+        <div className="container-vertical">
+          <CarouselScroller
+            index={this.state.index}
+            onChange={this.onChange}
+            className="scroller-vertical"
+            orientation="y"
+          >
+            {_.range(1, 3).map(nr => (
               <div key={nr} className="scroller-item-3">{nr}</div>
             ))}
           </CarouselScroller>

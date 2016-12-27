@@ -34,6 +34,7 @@ body {
   margin-bottom: 10px;
   background: green;
   position: relative;
+  cursor: default;
 }
 
 .container-vertical {
@@ -43,6 +44,7 @@ body {
   margin-bottom: 10px;
   background: purple;
   overflow: hidden; 
+  cursor: default;
 }
 
 .scroller {
@@ -50,7 +52,8 @@ body {
   white-space: nowrap;
 }
 
-.scroller.scrolling {
+.scroller.scrolling,
+.scroller-vertical.scrolling {
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
