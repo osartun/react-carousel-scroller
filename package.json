@@ -6,8 +6,11 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.3",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "requestanimationframe": "0.0.23"
   },
   "scripts": {
     "start": "react-scripts start",
