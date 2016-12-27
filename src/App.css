@@ -25,12 +25,28 @@
 
 .container {
   width: 500px;
+  height: 100px;
   margin: auto;
   background: green;
+  position: relative;
 }
 
 .scroller {
+  position: absolute;
+  white-space: nowrap;
+}
+
+.scroller.scrolling {
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.scroller-item {
+  display: inline-block;
   background: rgba(255,0,0,0.5);
-  width: 750px;
+  width: 100px;
   height: 100px;
+  margin: 0 5px;
 }

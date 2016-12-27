@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ScrollerContainer from '../lib/scroller-container';
+import _ from 'lodash';
+import CarouselScroller from '../lib/carousel-scroller';
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,9 +28,11 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <div className="container">
-          <ScrollerContainer className="scroller">
-            Foobar
-          </ScrollerContainer>
+          <CarouselScroller className="scroller">
+            {_.range(1,10).map(nr => (
+              <div key={nr} className="scroller-item">{nr}</div>
+            ))}
+          </CarouselScroller>
         </div>
       </div>
     );
