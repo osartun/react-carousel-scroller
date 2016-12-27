@@ -1,7 +1,0 @@
-.react-scroller {
-  transition: transform 0.3s 0 ease-out;
-}
-
-.react-scroller.scrolling {
-  transition-duration: 0;
-}
