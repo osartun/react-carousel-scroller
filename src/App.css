@@ -23,12 +23,26 @@
   to { transform: rotate(360deg); }
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
   width: 500px;
   height: 100px;
   margin: auto;
+  margin-bottom: 10px;
   background: green;
   position: relative;
+}
+
+.container-vertical {
+  width: 100px;
+  height: 300px;
+  margin: auto;
+  margin-bottom: 10px;
+  background: purple;
+  overflow: hidden; 
 }
 
 .scroller {
@@ -49,4 +63,18 @@
   width: 100px;
   height: 100px;
   margin: 0 5px;
+}
+
+.scroller-item-2 {
+  display: inline-block;
+  background: rgba(255,255,0,0.5);
+  width: 500px;
+  height: 100px;
+}
+
+.scroller-item-3 {
+  background: magenta;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
 }

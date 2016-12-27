@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import CarouselScroller from '../lib/carousel-scroller';
+import CarouselScroller, { START, END } from '../lib/carousel-scroller';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,13 +8,27 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deltaX: 0,
+      index: 0,
+      end: 'start',
     };
-    this.handleScroll = this.handleScroll.bind(this);
+    this.next = this.setIndex.bind(this, 1);
+    this.prev = this.setIndex.bind(this, -1);
+    this.onChange = this.onChange.bind(this);
+    this.onEnd = this.onEnd.bind(this);
   }
 
-  handleScroll(pos) {
-    this.setState({ deltaX: pos.deltaX });
+  setIndex(dir) {
+    this.setState({
+      index: this.state.index + dir,
+    });
+  }
+
+  onChange(index) {
+    this.setState({ index, end: '' });
+  }
+
+  onEnd(isAtEnd, whichEnd) {
+    this.setState({ end: isAtEnd ? whichEnd : '' });
   }
 
   render() {
@@ -28,12 +42,65 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <div className="container">
-          <CarouselScroller className="scroller">
+          <CarouselScroller
+            index={this.state.index}
+            onChange={this.onChange}
+            onEnd={this.onEnd}
+            className="scroller"
+          >
             {_.range(1, 10).map(nr => (
               <div key={nr} className="scroller-item">{nr}</div>
             ))}
           </CarouselScroller>
         </div>
+        <div className="container">
+          <CarouselScroller
+            index={this.state.index}
+            onChange={this.onChange}
+            className="scroller"
+          >
+            {_.range(1, 4).map(nr => (
+              <div key={nr} className="scroller-item">{nr}</div>
+            ))}
+          </CarouselScroller>
+        </div>
+        <div className="container">
+          <CarouselScroller
+            index={3}
+            onChange={this.onChange}
+            onEnd={this.onEnd}
+            className="scroller"
+          >
+            {_.range(1, 10).map(nr => (
+              <div key={nr} className="scroller-item">{nr}</div>
+            ))}
+          </CarouselScroller>
+        </div>
+        <div className="container">
+          <CarouselScroller
+            index={this.state.index}
+            onChange={this.onChange}
+            className="scroller"
+          >
+            {_.range(1, 10).map(nr => (
+              <div key={nr} className="scroller-item-2">{nr}</div>
+            ))}
+          </CarouselScroller>
+        </div>
+        <div className="container-vertical">
+          <CarouselScroller
+            index={this.state.index}
+            onChange={this.onChange}
+            className="scroller"
+            orientation="y"
+          >
+            {_.range(1, 10).map(nr => (
+              <div key={nr} className="scroller-item-3">{nr}</div>
+            ))}
+          </CarouselScroller>
+        </div>
+        <button onClick={this.prev} disabled={this.state.end === START}>Prev</button>
+        <button onClick={this.next} disabled={this.state.end === END}>Next</button>
       </div>
     );
   }
