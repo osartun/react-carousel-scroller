@@ -1,8 +1,8 @@
 # dependencies
 node_modules
 
-# build output
-lib
+# build input
+src
 
 # misc
 .DS_Store
