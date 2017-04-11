@@ -104,7 +104,7 @@ export default class EasedScroller extends Component {
 
   getStyle() {
     return {
-      transition: `transform ${this.props.easeDuration}ms 0 ease-out`,
+      transition: `transform ${this.props.easeDuration}ms ease-out`,
     };
   }
 
