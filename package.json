@@ -1,15 +1,15 @@
 {
   "name": "react-carousel-scroller",
-  "version": "0.1.3",
+  "version": "0.1.9",
   "description": "An application agnostic scrolling React component for controllable carousels",
-  "main": "lib/carousel-scroller.js",
+  "main": "./carousel-scroller.js",
   "repository": "https://github.com/osartun/react-carousel-scroller",
   "author": "Oliver Sartun",
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "classnames": "^2.2.5",
-    "requestanimationframe": "^0.0.23"
+    "raf": "^3.3.0"
   },
   "peerDependencies": {
     "react": ">=15.3.0"
@@ -20,7 +20,7 @@
     "babel-preset-es2015": "^6.24.1"
   },
   "scripts": {
-    "compile": "babel -d lib/ src/",
+    "compile": "babel -d ./ src/",
     "prepublish": "npm run compile"
   }
 }

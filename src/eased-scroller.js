@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
-import requestAnimationFrame from 'requestanimationframe';
+import raf from 'raf';
 import Scroller from './scroller';
 
 const createTimestamp = typeof performance === "object" ?
@@ -79,7 +79,7 @@ export default class EasedScroller extends Component {
     const orientation = this.props.orientation;
     const endPos = this.calcPosAoT();
     this.setState({ style: this.getStyle() });
-    requestAnimationFrame(() => {
+    raf(() => {
       if (typeof this.props.onScrollEnd === 'function') {
         const { direction, velocity, acceleration } = this.state;
         this.props.onScrollEnd(Object.assign({}, pos, {
@@ -104,7 +104,7 @@ export default class EasedScroller extends Component {
 
   getStyle() {
     return {
-      transition: `transform ${this.props.easeDuration}ms 0 ease-out`,
+      transition: `transform ${this.props.easeDuration}ms ease-out`,
     };
   }
 
