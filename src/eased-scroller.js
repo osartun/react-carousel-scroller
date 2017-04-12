@@ -108,6 +108,10 @@ export default class EasedScroller extends Component {
     };
   }
 
+  renderStyle() {
+    return Object.assign({}, this.state.style, this.props.style);
+  }
+
   getRenderProps() {
     const props = _.omit(this.props, ['orientation', 'easeDuration']);
     return Object.assign({}, props, {
@@ -115,7 +119,7 @@ export default class EasedScroller extends Component {
       onScrollStart: this.handleScrollStart,
       onScroll: this.handleScroll,
       onScrollEnd: this.handleScrollEnd,
-      style: this.state.style,
+      style: this.renderStyle(),
     });
   }
 
