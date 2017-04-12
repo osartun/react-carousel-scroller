@@ -169,6 +169,21 @@ export default class CarouselScroller extends Component {
     return classNames({ scrolling }, this.props.className);
   }
 
+  getStyle() {
+    const base = {
+      position: 'absolute',
+      whiteSpace: 'nowrap',
+    };
+    const whileScrolling = this.state.scrolling ? {
+      userSelect: 'none',
+    } : null;
+    return Object.assign({},
+      base,
+      whileScrolling,
+      this.props.style
+    );
+  }
+
   render() {
     const { x, y } = this.state;
     return React.createElement(EasedScroller, {
@@ -179,7 +194,8 @@ export default class CarouselScroller extends Component {
       ref: this.setScrollerRef,
       onScrollStart: this.handleScrollStart,
       onScroll: this.handleScroll,
-      onScrollEnd: this.handleScrollEnd
+      onScrollEnd: this.handleScrollEnd,
+      style: this.getStyle(),
     }, this.props.children);
   }
 }
@@ -189,6 +205,7 @@ CarouselScroller.propTypes = {
   index: PropTypes.number,
   onChange: PropTypes.func,
   onEnd: PropTypes.func,
+  withStyle: PropTypes.bool,
 };
 
 CarouselScroller.defaultProps = {
