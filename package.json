@@ -1,6 +1,6 @@
 {
   "name": "react-carousel-scroller",
-  "version": "0.1.23",
+  "version": "0.2.0",
   "description": "An application agnostic scrolling React component for controllable carousels",
   "main": "./carousel-scroller.js",
   "repository": "https://github.com/osartun/react-carousel-scroller",
