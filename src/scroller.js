@@ -75,7 +75,7 @@ export default class Scroller extends Component {
   }
 
   determineWheelEnd() {
-    if (this._wheelEndTimerId === undefined) {
+    if (this._wheelEndTimerId !== undefined) {
       clearTimeout(this._wheelEndTimerId);
     }
     this._wheelEndTimerId = setTimeout(() => {
@@ -91,11 +91,11 @@ export default class Scroller extends Component {
     if (this._wheelEndTimerId === undefined) {
       // So far, not wheeling, so let's start with it
       this.handleWheelStart(e);
-      // Set a timeout to determine the wheeling's end
-      this.determineWheelEnd();
     } else {
       this.handleWheelMove(e);
     }
+    // Set a timeout to determine the wheeling's end
+    this.determineWheelEnd();
   }
 
   handleWheelStart(e) {
@@ -158,5 +158,5 @@ Scroller.defaultProps = {
   x: 0,
   y: 0,
   style: null,
-  wheelEndDelay: 1000,
+  wheelEndDelay: 100,
 };
