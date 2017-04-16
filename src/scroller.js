@@ -15,10 +15,17 @@ export default class Scroller extends Component {
     this.handleScrollStart = this.handleScrollStart.bind(this);
     this.handleScrollMove = this.handleScrollMove.bind(this);
     this.handleScrollEnd = this.handleScrollEnd.bind(this);
+    this.handleWheel = this.handleWheel.bind(this);
   }
 
   setElRef(el) {
     this.el = el;
+  }
+
+  callHandler(name, ...args) {
+    if (_.isFunction(this.props[name])) {
+      this.props[name](...args);
+    }
   }
 
   handleScrollStart(e) {
@@ -37,12 +44,10 @@ export default class Scroller extends Component {
     doc.addEventListener('touchend', this.handleScrollEnd, true);
     doc.addEventListener('mouseup', this.handleScrollEnd, true);
 
-    if (typeof this.props.onScrollStart === 'function') {
-      this.props.onScrollStart({
-        x: this.props.x,
-        y: this.props.y,
-      }, e);
-    }
+    this.callHandler('onScrollStart', {
+      x: this.props.x,
+      y: this.props.y,
+    }, e);
   }
 
   handleScrollMove(e) {
@@ -50,12 +55,10 @@ export default class Scroller extends Component {
 
     const { pageX, pageY } = (e.touches && e.touches[0]) || e;
 
-    if (typeof this.props.onScroll === 'function') {
-      this.props.onScroll({
-        x: this.state.startRelX + pageX - this.state.startAbsX,
-        y: this.state.startRelY + pageY - this.state.startAbsY,
-      }, e);
-    }
+    this.callHandler('onScroll', {
+      x: this.state.startRelX + pageX - this.state.startAbsX,
+      y: this.state.startRelY + pageY - this.state.startAbsY,
+    }, e);
   }
 
   handleScrollEnd(e) {
@@ -65,12 +68,55 @@ export default class Scroller extends Component {
     doc.removeEventListener('touchend', this.handleScrollEnd, true);
     doc.removeEventListener('mouseup', this.handleScrollEnd, true);
 
-    if (typeof this.props.onScrollEnd === 'function') {
-      this.props.onScrollEnd({
-        x: this.props.x,
-        y: this.props.y,
-      }, e);
+    this.callHandler('onScrollEnd', {
+      x: this.props.x,
+      y: this.props.y,
+    }, e);
+  }
+
+  determineWheelEnd() {
+    if (this._wheelEndTimerId !== undefined) {
+      clearTimeout(this._wheelEndTimerId);
     }
+    this._wheelEndTimerId = setTimeout(() => {
+      delete this._wheelEndTimerId;
+      this.handleWheelEnd();
+    }, this.props.wheelEndDelay);
+  }
+
+  handleWheel(e) {
+    if (this.props.disableOnWheel) return;
+    e.preventDefault();
+
+    if (this._wheelEndTimerId === undefined) {
+      // So far, not wheeling, so let's start with it
+      this.handleWheelStart(e);
+    } else {
+      this.handleWheelMove(e);
+    }
+    // Set a timeout to determine the wheeling's end
+    this.determineWheelEnd();
+  }
+
+  handleWheelStart(e) {
+    this.callHandler('onScrollStart', {
+      x: this.props.x,
+      y: this.props.y,
+    }, e);
+  }
+
+  handleWheelMove(e) {
+    this.callHandler('onScroll', {
+      x: this.props.x - e.deltaX,
+      y: this.props.y - e.deltaY,
+    }, e);
+  }
+
+  handleWheelEnd() {
+    this.callHandler('onScrollEnd', {
+      x: this.props.x,
+      y: this.props.y,
+    });
   }
 
   renderStyle() {
@@ -81,13 +127,15 @@ export default class Scroller extends Component {
   }
 
   render() {
-    const props = _.omit(this.props, ['tagName', 'x', 'y', 'onScrollStart', 'onScroll', 'onScrollEnd']);
+    const props = _.omit(this.props, ['tagName', 'x', 'y', 'onScrollStart',
+      'onScroll', 'onScrollEnd', 'disableOnWheel', 'wheelEndDelay']);
 
     return React.createElement(this.props.tagName, Object.assign({}, props,
       {
         ref: this.setWrapperRef,
         onTouchStart: this.handleScrollStart,
         onMouseDown: this.handleScrollStart,
+        onWheel: this.handleWheel,
         style: this.renderStyle(),
       }), this.props.children);
   }
@@ -101,6 +149,8 @@ Scroller.propTypes = {
   onScrollEnd: PropTypes.func,
   x: PropTypes.number,
   y: PropTypes.number,
+  disableOnWheel: PropTypes.bool,
+  wheelEndDelay: PropTypes.number,
 };
 
 Scroller.defaultProps = {
@@ -108,4 +158,5 @@ Scroller.defaultProps = {
   x: 0,
   y: 0,
   style: null,
+  wheelEndDelay: 100,
 };
