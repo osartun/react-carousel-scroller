@@ -142,7 +142,7 @@ export default class Scroller extends Component {
 }
 
 Scroller.propTypes = {
-  tagName: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Component)]),
+  tagName: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   children: PropTypes.node,
   onScrollStart: PropTypes.func,
   onScroll: PropTypes.func,

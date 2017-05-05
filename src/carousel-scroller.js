@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import classNames from 'classnames';
 import EasedScroller from './eased-scroller';
@@ -15,9 +16,7 @@ export default class CarouselScroller extends Component {
       y: 0,
       initialPos: undefined,
     };
-    this.el = {};
     this.bounds = {};
-    this.setScrollerRef = this.setScrollerRef.bind(this);
     this.handleScrollStart = this.handleScrollStart.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleScrollEnd = this.handleScrollEnd.bind(this);
@@ -56,24 +55,18 @@ export default class CarouselScroller extends Component {
   }
 
   componentWillUnmount() {
-    this.el = {};
     this.bounds = {};
   }
 
-  setScrollerRef(comp) {
-    this.el = {
-      scroller: comp.el,
-      container: comp.el.parentElement,
-    };
-  }
-
   updateBounds() {
-    if (this.el.scroller && this.el.container) {
-      const children = this.el.scroller.children;
+    const scrollerEl = ReactDOM.findDOMNode(this);
+    if (scrollerEl !== null) {
+      const children = Array.from(scrollerEl.children);
+      const container = scrollerEl.parentElement;
       this.bounds = {
-        container: this.el.container.getBoundingClientRect(),
-        scroller: this.el.scroller.getBoundingClientRect(),
-        children: Array.from(children).map(child => child.getBoundingClientRect()),
+        container: container.getBoundingClientRect(),
+        scroller: scrollerEl.getBoundingClientRect(),
+        children: children.map(child => child.getBoundingClientRect())
       };
     }
   }
@@ -184,19 +177,23 @@ export default class CarouselScroller extends Component {
     );
   }
 
-  render() {
+  getRenderProps() {
     const { x, y } = this.state;
-    return React.createElement(EasedScroller, {
+    const props = _.omit(this.props, 'index');
+    return Object.assign({}, props, {
       x,
       y,
       orientation: this.props.orientation,
       className: this.getClassName(),
-      ref: this.setScrollerRef,
       onScrollStart: this.handleScrollStart,
       onScroll: this.handleScroll,
       onScrollEnd: this.handleScrollEnd,
       style: this.getStyle(),
-    }, this.props.children);
+    });
+  }
+
+  render() {
+    return React.createElement(EasedScroller, this.getRenderProps(), this.props.children);
   }
 }
 
@@ -205,7 +202,6 @@ CarouselScroller.propTypes = {
   index: PropTypes.number,
   onChange: PropTypes.func,
   onEnd: PropTypes.func,
-  withStyle: PropTypes.bool,
 };
 
 CarouselScroller.defaultProps = {
