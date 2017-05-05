@@ -21,6 +21,7 @@ export default class CarouselScroller extends Component {
     this.handleScrollStart = this.handleScrollStart.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleScrollEnd = this.handleScrollEnd.bind(this);
+    this.getPosFromChildBounds = this.getPosFromChildBounds.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -139,7 +140,7 @@ export default class CarouselScroller extends Component {
   }
 
   getIndexFromPos(pos) {
-    const childrenPos = this.bounds.children.map(this.getPosFromChildBounds.bind(this));
+    const childrenPos = this.bounds.children.map(this.getPosFromChildBounds);
     const childPos = this.getClosestVal(pos, childrenPos);
     return childrenPos.indexOf(childPos);
   }
