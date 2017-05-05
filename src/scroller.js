@@ -1,6 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 
+export class ClickTimeframe {
+  constructor(duration) {
+    this.duration = duration || CLICK_TIMEFRAME_DURATION;
+    this.timeout = undefined;
+    this.reset = this.reset.bind(this);
+    this.wait = this.wait.bind(this);
+  }
+
+  _reset() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      delete this.timeout;
+      const doc = this.doc;
+      doc.removeEventListener('touchend', this._reset);
+      doc.removeEventListener('mouseup', this._reset);
+    }
+  }
+
+  wait(doc, callback) {
+    // If the user releases the mouse shortly after pressing it, there should be
+    // no scroll action as his gesture should be interpreted as a click
+    this.doc = doc;
+    this._reset();
+    doc.addEventListener('touchend', this._reset);
+    doc.addEventListener('mouseup', this._reset);
+    this.timeout = setTimeout(callback, this.duration);
+  }
+}
+
 export default class Scroller extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +40,7 @@ export default class Scroller extends Component {
       startRelY: 0,
     };
     this.el = null;
+    this.clickTimeFrame = new ClickTimeframe();
     this.setWrapperRef = this.setElRef.bind(this);
     this.handleScrollStart = this.handleScrollStart.bind(this);
     this.handleScrollMove = this.handleScrollMove.bind(this);
@@ -29,25 +59,27 @@ export default class Scroller extends Component {
   }
 
   handleScrollStart(e) {
-    const { pageX, pageY } = (e.touches && e.touches[0]) || e;
-
-    this.setState({
-      startAbsX: pageX,
-      startAbsY: pageY,
-      startRelX: this.props.x,
-      startRelY: this.props.y,
-    });
-
     const doc = this.el.ownerDocument;
-    doc.addEventListener('touchmove', this.handleScrollMove);
-    doc.addEventListener('mousemove', this.handleScrollMove);
-    doc.addEventListener('touchend', this.handleScrollEnd, true);
-    doc.addEventListener('mouseup', this.handleScrollEnd, true);
+    this.clickTimeFrame.wait(doc, () => {
+      const { pageX, pageY } = (e.touches && e.touches[0]) || e;
 
-    this.callHandler('onScrollStart', {
-      x: this.props.x,
-      y: this.props.y,
-    }, e);
+      this.setState({
+        startAbsX: pageX,
+        startAbsY: pageY,
+        startRelX: this.props.x,
+        startRelY: this.props.y,
+      });
+
+      doc.addEventListener('touchmove', this.handleScrollMove);
+      doc.addEventListener('mousemove', this.handleScrollMove);
+      doc.addEventListener('touchend', this.handleScrollEnd, true);
+      doc.addEventListener('mouseup', this.handleScrollEnd, true);
+
+      this.callHandler('onScrollStart', {
+        x: this.props.x,
+        y: this.props.y,
+      }, e);
+    });
   }
 
   handleScrollMove(e) {
