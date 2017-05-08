@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 
+const CLICK_TIMEFRAME_DURATION = 300;
+
 export class ClickTimeframe {
   constructor(duration) {
     this.duration = duration || CLICK_TIMEFRAME_DURATION;
     this.timeout = undefined;
-    this.reset = this.reset.bind(this);
+    this._reset = this._reset.bind(this);
     this.wait = this.wait.bind(this);
   }
 
@@ -59,9 +61,10 @@ export default class Scroller extends Component {
   }
 
   handleScrollStart(e) {
+    const { pageX, pageY } = (e.touches && e.touches[0]) || e;
     const doc = this.el.ownerDocument;
+
     this.clickTimeFrame.wait(doc, () => {
-      const { pageX, pageY } = (e.touches && e.touches[0]) || e;
 
       this.setState({
         startAbsX: pageX,
