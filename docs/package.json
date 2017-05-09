@@ -1,0 +1,21 @@
+{
+  "name": "react-carousel-scroller-docs",
+  "version": "0.0.1",
+  "description": "GitHub Page for React Carousel Scroller",
+  "main": "index.js",
+  "author": "Oliver Sartun",
+  "license": "MIT",
+  "scripts": {
+    "bundle": "./node_modules/.bin/webpack --config webpack.config.js",
+    "compile-scroller": "cd .. && npm run compile && cd docs",
+    "build": "npm run compile-scroller && npm run bundle"
+  },
+  "devDependencies": {
+    "webpack": "^2.5.1"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-carousel-scroller": "file:.."
+  }
+}
