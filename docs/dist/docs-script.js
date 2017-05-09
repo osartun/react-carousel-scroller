@@ -27878,31 +27878,34 @@ module.exports = __webpack_require__(231);
 
 /***/ }),
 /* 140 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_carousel_scroller__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_carousel_scroller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_carousel_scroller__);
 
 
+var _react = __webpack_require__(40);
 
+var _react2 = _interopRequireDefault(_react);
 
-class TestScroller extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, "Yo!!");
-  }
-}
+var _reactDom = __webpack_require__(139);
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(
-  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TestScroller, { foo: 'bar' }),
-  document.getElementById('foobar')
-)
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _reactCarouselScroller = __webpack_require__(138);
+
+var _reactCarouselScroller2 = _interopRequireDefault(_reactCarouselScroller);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TestScroller = function TestScroller() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    'Now with babel configuration'
+  );
+};
+
+_reactDom2.default.render(_react2.default.createElement(TestScroller, { foo: 'bar' }), document.getElementById('foobar'));
 
 /***/ }),
 /* 141 */

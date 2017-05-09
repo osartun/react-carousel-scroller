@@ -11,11 +11,15 @@
     "build": "npm run compile-scroller && npm run bundle"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
     "webpack": "^2.5.1"
   },
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-carousel-scroller": "file:.."
+    "react-carousel-scroller": "file:..",
+    "react-dom": "^15.5.4"
   }
 }

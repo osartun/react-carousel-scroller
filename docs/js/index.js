@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CarouselScroller from 'react-carousel-scroller';
 
-class TestScroller extends React.Component {
-  render() {
-    return React.createElement("div", null, "Yo!!");
-  }
-}
+const TestScroller = () => (
+  <div>Now with babel configuration</div>
+);
 
 ReactDOM.render(
   React.createElement(TestScroller, { foo: 'bar' }),
