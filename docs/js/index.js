@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DemoScroller from './demo-scroller';
+import Showcase from './showcase';
 
 ReactDOM.render(
-  React.createElement(DemoScroller),
+  <Showcase />,
   document.getElementById('demo-scroller-container')
 )

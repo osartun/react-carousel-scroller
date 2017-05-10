@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import CarouselScroller from '../src/carousel-scroller';
 import css from './style.css';
 
