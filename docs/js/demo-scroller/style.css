@@ -5,10 +5,17 @@
   overflow: hidden;
 }
 
+.scroller {
+  width: 5500px;
+}
+
 .item {
-  display: inline-block;
+  display: flex;
+  float: left;
   width: 100px;
   height: 100px;
-  background-color: blue;
+  background-color: #b3e5fc;
   margin-right: 10px;
+  justify-content: center;
+  align-items: center;
 }

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CarouselScroller from '../src/carousel-scroller';
-import style from './style.css';
+import css from './style.css';
 
 export default class DemoScroller extends Component {
   constructor(props) {
@@ -19,13 +19,14 @@ export default class DemoScroller extends Component {
 
   render() {
     return (
-      <div className={style.wrapper}>
+      <div className={css.wrapper}>
         <CarouselScroller
+          className={css.scroller}
           index={this.state.index}
           onChange={this.onChange}
         >
           {_.times(50).map((e, i) => (
-            <div key={i} className={style.item} />
+            <div key={i} className={css.item}>{i}</div>
           ))}
         </CarouselScroller>
       </div>

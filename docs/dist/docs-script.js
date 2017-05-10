@@ -27600,14 +27600,12 @@ var DemoScroller = function (_Component) {
       index: 0
     };
     _this.onChange = _this.onChange.bind(_this);
-    console.log(_style2.default);
     return _this;
   }
 
   _createClass(DemoScroller, [{
     key: 'onChange',
     value: function onChange(index) {
-      console.log(index);
       this.setState({ index: index });
     }
   }, {
@@ -27619,11 +27617,16 @@ var DemoScroller = function (_Component) {
         _react2.default.createElement(
           _carouselScroller2.default,
           {
+            className: _style2.default.scroller,
             index: this.state.index,
             onChange: this.onChange
           },
           _lodash2.default.times(50).map(function (e, i) {
-            return _react2.default.createElement('div', { key: i, className: _style2.default.item });
+            return _react2.default.createElement(
+              'div',
+              { key: i, className: _style2.default.item },
+              i
+            );
           })
         )
       );
@@ -29502,11 +29505,12 @@ exports = module.exports = __webpack_require__(201)(undefined);
 
 
 // module
-exports.push([module.i, "._34XDtQJHntvkx8Rk5ZtzxX {\n  position: relative;\n  width: 640px;\n  height: 100px;\n  overflow: hidden;\n}\n\n._2SG1ss6tqDGwJuMLCohlSQ {\n  display: inline-block;\n  width: 100px;\n  height: 100px;\n  background-color: blue;\n  margin-right: 10px;\n}\n", ""]);
+exports.push([module.i, "._34XDtQJHntvkx8Rk5ZtzxX {\n  position: relative;\n  width: 640px;\n  height: 100px;\n  overflow: hidden;\n}\n\n._210TrMhXh_O9vlyCwH5GOE {\n  width: 5500px;\n}\n\n._2SG1ss6tqDGwJuMLCohlSQ {\n  display: flex;\n  float: left;\n  width: 100px;\n  height: 100px;\n  background-color: #b3e5fc;\n  margin-right: 10px;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
 
 // exports
 exports.locals = {
 	"wrapper": "_34XDtQJHntvkx8Rk5ZtzxX",
+	"scroller": "_210TrMhXh_O9vlyCwH5GOE",
 	"item": "_2SG1ss6tqDGwJuMLCohlSQ"
 };
 
