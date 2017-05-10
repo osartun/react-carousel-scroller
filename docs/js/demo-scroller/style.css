@@ -1,0 +1,14 @@
+.wrapper {
+  position: relative;
+  width: 640px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.item {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  margin-right: 10px;
+}
