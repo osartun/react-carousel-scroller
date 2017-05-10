@@ -104,7 +104,7 @@ export default class CarouselScroller extends Component {
     });
     if (typeof this.props.onChange === 'function') {
       const endIndex = this.getIndexFromPos(pos[orientation]);
-      this.props.onChange(endIndex, this.state.index);
+      this.props.onChange(endIndex);
     }
   }
 
