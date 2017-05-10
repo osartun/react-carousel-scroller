@@ -29505,13 +29505,13 @@ exports = module.exports = __webpack_require__(201)(undefined);
 
 
 // module
-exports.push([module.i, "._34XDtQJHntvkx8Rk5ZtzxX {\n  position: relative;\n  width: 640px;\n  height: 100px;\n  overflow: hidden;\n}\n\n._210TrMhXh_O9vlyCwH5GOE {\n  width: 5500px;\n}\n\n._2SG1ss6tqDGwJuMLCohlSQ {\n  display: flex;\n  float: left;\n  width: 100px;\n  height: 100px;\n  background-color: #b3e5fc;\n  margin-right: 10px;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
+exports.push([module.i, ".wrapper__34XDtQJH {\n  position: relative;\n  width: 640px;\n  height: 100px;\n  overflow: hidden;\n}\n\n.scroller__210TrMhX {\n  width: 5500px;\n}\n\n.item__2SG1ss6t {\n  display: flex;\n  float: left;\n  width: 100px;\n  height: 100px;\n  background-color: #b3e5fc;\n  margin-right: 10px;\n  justify-content: center;\n  align-items: center;\n}\n", ""]);
 
 // exports
 exports.locals = {
-	"wrapper": "_34XDtQJHntvkx8Rk5ZtzxX",
-	"scroller": "_210TrMhXh_O9vlyCwH5GOE",
-	"item": "_2SG1ss6tqDGwJuMLCohlSQ"
+	"wrapper": "wrapper__34XDtQJH",
+	"scroller": "scroller__210TrMhX",
+	"item": "item__2SG1ss6t"
 };
 
 /***/ }),
