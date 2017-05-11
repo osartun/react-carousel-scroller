@@ -172,7 +172,6 @@ export default class CarouselScroller extends Component {
   getStyle() {
     const base = {
       position: 'absolute',
-      whiteSpace: 'nowrap',
     };
     const whileScrolling = this.state.scrolling ? {
       userSelect: 'none',
