@@ -29,6 +29,13 @@ export default class CarouselScroller extends Component {
       this.setState({ [this.props.orientation]: pos });
       this.conditionallyCallOnEnd(nextProps.index, this.props.index);
     }
+    if (nextProps.orientation !== this.props.orientation) {
+      // Transfer position
+      this.setState({
+        [nextProps.orientation]: this.state[this.props.orientation],
+        [this.props.orientation]: 0,
+      });
+    }
   }
 
   conditionallyCallOnEnd(nextIndex, prevIndex) {
