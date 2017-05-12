@@ -4,16 +4,28 @@ In this directory the GitHub page for react-carousel-scroller is managed: https:
 
 ## Building locally
 
-If you want to open the page on your local machine, clone the project, install the project's dependencies, navigate to the docs directory and install its dependencies as well. Then run `npm run build`:
+If you want to open the page on your local machine, follow these steps:
 
-```
-$ # install project's dependencies with yarn:
-$ yarn install
-$ # navigate to docs directory and install its dependencies:
-$ cd docs
-$ yarn install
-$ # build the src files
-$ npm run build
-$ # open in your browser
-$ open index.html
-```
+1. Install the project's dependencies with yarn
+
+    ```
+    $ yarn install
+    ```
+
+1. Navigate to the docs directory and install its dependencies as well
+    ```
+    $ cd docs
+    $ yarn install
+    ```
+
+1. Build the src files
+
+    ```
+    $ npm run build
+    ```
+    
+1. Open the site in your browser
+
+    ```
+    $ open index.html
+    ```
