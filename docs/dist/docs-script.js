@@ -30309,7 +30309,7 @@ exports = module.exports = __webpack_require__(74)(undefined);
 
 
 // module
-exports.push([module.i, ".code-output-wrapper__3HGQyYGi {\n  background-color: #e0e0e0;\n  padding: 0 1em;\n}\n", ""]);
+exports.push([module.i, ".code-output-wrapper__3HGQyYGi {\n  background-color: #e0e0e0;\n  padding: 0 1em;\n  overflow: auto;\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -30325,7 +30325,7 @@ exports = module.exports = __webpack_require__(74)(undefined);
 
 
 // module
-exports.push([module.i, ".option-input-fieldset__6jivZqXP {\n  margin: 10px 0;\n  padding: 10px;\n  border: 1px solid #b3e5fc;\n}\n\n.option-input-column__3Ta9ulsK {\n  display: inline-block;\n  width: calc(50% - 10px);\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.option-input-column-headline__3gCz1p23 {\n  font-size: 1em;\n  margin-top: 0;\n}\n\n.option-input-wrapper__3dPF2uw_ {\n  margin-bottom: 10px;\n}\n\n.option-input-label-before__10HVoQ_m {\n  display: inline-block;\n  width: 120px;\n}\n\n.option-input-listener-option__2caXjJNL {\n  display: block;\n}\n\n.option-input-code-option__3uTY8q_l {\n  display: inline-block;\n  background: #e0e0e0;\n  padding: 0 1em;\n  vertical-align: middle;\n}\n", ""]);
+exports.push([module.i, ".option-input-fieldset__6jivZqXP {\n  margin: 10px 0;\n  padding: 10px;\n  border: 1px solid #b3e5fc;\n}\n\n.option-input-column__3Ta9ulsK {\n  display: inline-block;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n@media (min-width: 570px) {\n  .option-input-column__3Ta9ulsK {\n    width: calc(50% - 10px);\n  }\n}\n\n.option-input-column-headline__3gCz1p23 {\n  font-size: 1em;\n  margin-top: 0;\n}\n\n.option-input-wrapper__3dPF2uw_ {\n  margin-bottom: 10px;\n}\n\n.option-input-label-before__10HVoQ_m {\n  display: inline-block;\n  width: 120px;\n}\n\n.option-input-listener-option__2caXjJNL {\n  display: block;\n}\n\n.option-input-code-option__3uTY8q_l {\n  display: inline-block;\n  background: #e0e0e0;\n  padding: 0 1em;\n  vertical-align: middle;\n}\n", ""]);
 
 // exports
 exports.locals = {
