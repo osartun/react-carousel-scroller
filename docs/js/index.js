@@ -4,5 +4,5 @@ import Showcase from './showcase';
 
 ReactDOM.render(
   <Showcase />,
-  document.getElementById('demo-scroller-container')
+  document.getElementById('showcase-container')
 )

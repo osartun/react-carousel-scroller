@@ -93,6 +93,12 @@ var CarouselScroller = function (_Component) {
         this.setState((0, _defineProperty3.default)({}, this.props.orientation, pos));
         this.conditionallyCallOnEnd(nextProps.index, this.props.index);
       }
+      if (nextProps.orientation !== this.props.orientation) {
+        var _setState2;
+
+        // Transfer position
+        this.setState((_setState2 = {}, (0, _defineProperty3.default)(_setState2, nextProps.orientation, this.state[this.props.orientation]), (0, _defineProperty3.default)(_setState2, this.props.orientation, 0), _setState2));
+      }
     }
   }, {
     key: 'conditionallyCallOnEnd',
@@ -173,12 +179,12 @@ var CarouselScroller = function (_Component) {
   }, {
     key: 'handleScrollEnd',
     value: function handleScrollEnd(pos) {
-      var _setState4;
+      var _setState5;
 
       var orientation = this.props.orientation;
-      this.setState((_setState4 = {
+      this.setState((_setState5 = {
         scrolling: false
-      }, (0, _defineProperty3.default)(_setState4, orientation, this.state.initialPos), (0, _defineProperty3.default)(_setState4, 'initialPos', undefined), _setState4));
+      }, (0, _defineProperty3.default)(_setState5, orientation, this.state.initialPos), (0, _defineProperty3.default)(_setState5, 'initialPos', undefined), _setState5));
       if (typeof this.props.onChange === 'function') {
         var endIndex = this.getIndexFromPos(pos[orientation]);
         this.props.onChange(endIndex);
@@ -275,8 +281,7 @@ var CarouselScroller = function (_Component) {
     key: 'getStyle',
     value: function getStyle() {
       var base = {
-        position: 'absolute',
-        whiteSpace: 'nowrap'
+        position: 'absolute'
       };
       var whileScrolling = this.state.scrolling ? {
         userSelect: 'none'

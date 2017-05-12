@@ -1,0 +1,37 @@
+.fieldset {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #b3e5fc;
+}
+
+.column {
+  display: inline-block;
+  width: calc(50% - 10px);
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+.column-headline {
+  font-size: 1em;
+  margin-top: 0;
+}
+
+.wrapper {
+  margin-bottom: 10px;
+}
+
+.label-before {
+  display: inline-block;
+  width: 120px;
+}
+
+.listener-option {
+  display: block;
+}
+
+.code-option {
+  display: inline-block;
+  background: #e0e0e0;
+  padding: 0 1em;
+  vertical-align: middle;
+}
