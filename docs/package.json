@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "compile-scroller": "cd .. && npm run compile && cd docs",
-    "copy-scroller": "cd .. && cp ./*scroller.js docs/js/src && cd docs",
+    "copy-scroller": "mkdir -p src && cd .. && cp ./*scroller.js docs/js/src && cd docs",
     "bundle": "./node_modules/.bin/webpack --config webpack.config.js",
     "build": "npm run compile-scroller && npm run copy-scroller && npm run bundle"
   },
