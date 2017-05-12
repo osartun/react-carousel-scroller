@@ -53,6 +53,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _raf = require('raf');
+
+var _raf2 = _interopRequireDefault(_raf);
+
 var _easedScroller = require('./eased-scroller');
 
 var _easedScroller2 = _interopRequireDefault(_easedScroller);
@@ -167,6 +171,8 @@ var CarouselScroller = function (_Component) {
   }, {
     key: 'handleScroll',
     value: function handleScroll(pos) {
+      var _this2 = this;
+
       var orientation = this.props.orientation;
 
       var _getMinMaxVal = this.getMinMaxVal(),
@@ -174,17 +180,19 @@ var CarouselScroller = function (_Component) {
           min = _getMinMaxVal2[0],
           max = _getMinMaxVal2[1];
 
-      this.setState((0, _defineProperty3.default)({}, orientation, _lodash2.default.clamp(pos[orientation], min, max)));
+      (0, _raf2.default)(function () {
+        _this2.setState((0, _defineProperty3.default)({}, orientation, _lodash2.default.clamp(pos[orientation], min, max)));
+      });
     }
   }, {
     key: 'handleScrollEnd',
     value: function handleScrollEnd(pos) {
-      var _setState5;
+      var _setState4;
 
       var orientation = this.props.orientation;
-      this.setState((_setState5 = {
+      this.setState((_setState4 = {
         scrolling: false
-      }, (0, _defineProperty3.default)(_setState5, orientation, this.state.initialPos), (0, _defineProperty3.default)(_setState5, 'initialPos', undefined), _setState5));
+      }, (0, _defineProperty3.default)(_setState4, orientation, this.state.initialPos), (0, _defineProperty3.default)(_setState4, 'initialPos', undefined), _setState4));
       if (typeof this.props.onChange === 'function') {
         var endIndex = this.getIndexFromPos(pos[orientation]);
         this.props.onChange(endIndex);
@@ -209,7 +217,7 @@ var CarouselScroller = function (_Component) {
   }, {
     key: 'getLatchPos',
     value: function getLatchPos(pos) {
-      var _this2 = this;
+      var _this3 = this;
 
       var _getMinMaxVal3 = this.getMinMaxVal(),
           _getMinMaxVal4 = (0, _slicedToArray3.default)(_getMinMaxVal3, 2),
@@ -217,7 +225,7 @@ var CarouselScroller = function (_Component) {
           max = _getMinMaxVal4[1];
 
       var childrenPos = this.bounds.children.reduce(function (arr, childBounds) {
-        var childPos = _this2.getPosFromChildBounds(childBounds);
+        var childPos = _this3.getPosFromChildBounds(childBounds);
         if (childPos !== min) arr.push(childPos);
         return arr;
       }, []);
