@@ -31,6 +31,11 @@
   margin-bottom: 10px;
 }
 
+.wrapper.horizontal .item:last-of-type,
+.wrapper.vertical .item:last-of-type {
+  margin: 0;
+}
+
 .item::after {
   content: attr(data-i);
   position: absolute;
