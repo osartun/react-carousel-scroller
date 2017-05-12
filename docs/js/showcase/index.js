@@ -11,7 +11,7 @@ export default class Showcase extends Component {
       orientation: 'x',
       index: 0,
       isDiffSize: false,
-      listener: 'none'
+      listener: 'basic'
     };
     this.onChangeOption = this.onChangeOption.bind(this);
     this.onSlideBasic = this.onSlideBasic.bind(this);
@@ -28,7 +28,6 @@ export default class Showcase extends Component {
   }
 
   onSlideBasic(index) {
-    console.log(index);
     this.setState({ index });
   }
 

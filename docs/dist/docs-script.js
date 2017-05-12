@@ -28039,7 +28039,7 @@ var Showcase = function (_Component) {
       orientation: 'x',
       index: 0,
       isDiffSize: false,
-      listener: 'none'
+      listener: 'basic'
     };
     _this.onChangeOption = _this.onChangeOption.bind(_this);
     _this.onSlideBasic = _this.onSlideBasic.bind(_this);
@@ -28061,7 +28061,6 @@ var Showcase = function (_Component) {
   }, {
     key: 'onSlideBasic',
     value: function onSlideBasic(index) {
-      console.log(index);
       this.setState({ index: index });
     }
   }, {
@@ -28147,7 +28146,7 @@ var CodeOutput = function CodeOutput(props) {
     _react2.default.createElement(
       'code',
       null,
-      '\n<CarouselScroller\n  index={' + props.index + '}\n  orientation={' + props.orientation + '}\n  className="scroller" ' + (props.listener !== 'none' ? '\n  onChange={onChangeHandler}\n    ' : '') + '\n>\n  {_.times(' + props.nrOfItems + ').map(() => (\n    <div className="item" ' + (props.isDiffSize ? 'style={{ width: getWidth(\u2026) }} ' : '') + '/>\n  ))}\n</CarouselScroller>\n      '
+      '\n<div className="container ' + (props.orientation === 'x' ? 'horizontal' : 'vertical') + '" style={{\n  position: \'relative\',\n  overflow: \'hidden\', ' + (props.orientation === 'x' ? '\n  height: \'100px\',\n  width: \'100%\'' : '\n  height: \'300px\',\n  width: \'100px\'') + '\n}}>\n  <CarouselScroller\n    index={' + props.index + '}\n    orientation={' + props.orientation + '}\n    className="scroller" ' + (props.listener !== 'none' ? '\n    onChange={onChangeHandler}\n      ' : '') + '\n  >\n    {_.times(' + props.nrOfItems + ').map(() => (\n      <div className="item" ' + (props.isDiffSize ? 'style={{ width: getWidth(\u2026) }} ' : '') + '/>\n    ))}\n  </CarouselScroller>\n</div>\n      '
     )
   );
 };
@@ -30352,7 +30351,7 @@ exports = module.exports = __webpack_require__(74)(undefined);
 
 
 // module
-exports.push([module.i, ".showcase-scroller-wrapper__FbtGLQID {\n  position: relative;\n  height: 100px;\n  max-width: 100%;\n  overflow: hidden;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-vertical__21PodICg {\n  height: 500px;\n  width: 100px;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-horizontal__iJjLmJhB .showcase-scroller-scroller__3TKi0ivq {\n  white-space: nowrap;\n}\n\n.showcase-scroller-item__4z5RUq8k {\n  display: inline-block;\n  position: relative;\n  width: 100px;\n  height: 100px;\n  background-color: #b3e5fc;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-horizontal__iJjLmJhB .showcase-scroller-item__4z5RUq8k {\n  margin-right: 10px;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-vertical__21PodICg .showcase-scroller-item__4z5RUq8k {\n  margin-bottom: 10px;\n}\n\n.showcase-scroller-item__4z5RUq8k::after {\n  content: attr(data-i);\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n}\n", ""]);
+exports.push([module.i, ".showcase-scroller-wrapper__FbtGLQID {\n  position: relative;\n  height: 100px;\n  max-width: 100%;\n  overflow: hidden;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-vertical__21PodICg {\n  height: 300px;\n  width: 100px;\n  margin: auto;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-horizontal__iJjLmJhB .showcase-scroller-scroller__3TKi0ivq {\n  white-space: nowrap;\n}\n\n.showcase-scroller-item__4z5RUq8k {\n  display: inline-block;\n  position: relative;\n  width: 100px;\n  height: 100px;\n  background-color: #b3e5fc;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-horizontal__iJjLmJhB .showcase-scroller-item__4z5RUq8k {\n  margin-right: 10px;\n}\n\n.showcase-scroller-wrapper__FbtGLQID.showcase-scroller-vertical__21PodICg .showcase-scroller-item__4z5RUq8k {\n  margin-bottom: 10px;\n}\n\n.showcase-scroller-item__4z5RUq8k::after {\n  content: attr(data-i);\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n}\n", ""]);
 
 // exports
 exports.locals = {
