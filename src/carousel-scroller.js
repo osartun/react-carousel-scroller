@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
+import raf from 'raf';
 import EasedScroller from './eased-scroller';
 
 export const END = 'end';
@@ -97,8 +98,10 @@ export default class CarouselScroller extends Component {
   handleScroll(pos) {
     const orientation = this.props.orientation;
     const [min, max] = this.getMinMaxVal();
-    this.setState({
-      [orientation]: _.clamp(pos[orientation], min, max),
+    raf(() => {
+      this.setState({
+        [orientation]: _.clamp(pos[orientation], min, max),
+      });
     });
   }
 
