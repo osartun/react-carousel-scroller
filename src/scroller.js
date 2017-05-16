@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import ScrollCancelDetection from './lib/scroll-cancel-detection';
 
 export default class Scroller extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class Scroller extends Component {
       startRelY: 0,
     };
     this.el = null;
+    this.scrollCancelDetection = new ScrollCancelDetection();
     this.setWrapperRef = this.setElRef.bind(this);
     this.handleScrollStart = this.handleScrollStart.bind(this);
     this.handleScrollMove = this.handleScrollMove.bind(this);
@@ -44,6 +46,7 @@ export default class Scroller extends Component {
     doc.addEventListener('mousemove', this.handleScrollMove);
     doc.addEventListener('touchend', this.handleScrollEnd, true);
     doc.addEventListener('mouseup', this.handleScrollEnd, true);
+    this.scrollCancelDetection.on(doc, this.handleScrollEnd);
 
     this.callHandler('onScrollStart', {
       x: this.props.x,
@@ -68,6 +71,7 @@ export default class Scroller extends Component {
     doc.removeEventListener('mousemove', this.handleScrollMove);
     doc.removeEventListener('touchend', this.handleScrollEnd, true);
     doc.removeEventListener('mouseup', this.handleScrollEnd, true);
+    this.scrollCancelDetection.off();
 
     this.callHandler('onScrollEnd', {
       x: this.props.x,
