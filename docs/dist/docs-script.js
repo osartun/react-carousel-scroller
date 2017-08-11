@@ -29295,6 +29295,7 @@ var CarouselScroller = function (_Component) {
         x: x,
         y: y,
         orientation: this.props.orientation,
+        tagName: this.props.tagName,
         className: this.getClassName(),
         ref: this.setScrollerRef,
         onScrollStart: this.handleScrollStart,
@@ -29311,7 +29312,9 @@ exports.default = CarouselScroller;
 
 CarouselScroller.propTypes = {
   orientation: _propTypes2.default.oneOf(['x', 'y']),
+  tagName: _propTypes2.default.string,
   index: _propTypes2.default.number,
+  className: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onEnd: _propTypes2.default.func,
   withStyle: _propTypes2.default.bool
@@ -29456,8 +29459,9 @@ var EasedScroller = function (_Component) {
       var lineDelta = pos[orientation] - this.props[orientation];
       var velocity = lineDelta / timeDelta; // px per millisecond
       var acceleration = (velocity - this.state.velocity) / Math.pow(timeDelta, 2);
+      var direction = (0, _sign2.default)(lineDelta);
       this.setState({
-        direction: (0, _sign2.default)(lineDelta),
+        direction: direction,
         timestamp: timestamp,
         velocity: velocity,
         acceleration: acceleration
@@ -29465,12 +29469,7 @@ var EasedScroller = function (_Component) {
       if (typeof this.props.onScroll === 'function') {
         var _Object$assign2;
 
-        var _state = this.state,
-            direction = _state.direction,
-            _velocity = _state.velocity,
-            _acceleration = _state.acceleration;
-
-        this.props.onScroll((0, _assign2.default)({}, pos, (_Object$assign2 = {}, (0, _defineProperty3.default)(_Object$assign2, orientation, pos[orientation]), (0, _defineProperty3.default)(_Object$assign2, 'direction', direction), (0, _defineProperty3.default)(_Object$assign2, 'velocity', _velocity), (0, _defineProperty3.default)(_Object$assign2, 'acceleration', _acceleration), _Object$assign2)), e);
+        this.props.onScroll((0, _assign2.default)({}, pos, (_Object$assign2 = {}, (0, _defineProperty3.default)(_Object$assign2, orientation, pos[orientation]), (0, _defineProperty3.default)(_Object$assign2, 'direction', direction), (0, _defineProperty3.default)(_Object$assign2, 'velocity', velocity), (0, _defineProperty3.default)(_Object$assign2, 'acceleration', acceleration), _Object$assign2)), e);
       }
     }
   }, {
@@ -29486,10 +29485,10 @@ var EasedScroller = function (_Component) {
         if (typeof _this2.props.onScrollEnd === 'function') {
           var _Object$assign3;
 
-          var _state2 = _this2.state,
-              direction = _state2.direction,
-              velocity = _state2.velocity,
-              acceleration = _state2.acceleration;
+          var _state = _this2.state,
+              direction = _state.direction,
+              velocity = _state.velocity,
+              acceleration = _state.acceleration;
 
           _this2.props.onScrollEnd((0, _assign2.default)({}, pos, (_Object$assign3 = {}, (0, _defineProperty3.default)(_Object$assign3, orientation, endPos), (0, _defineProperty3.default)(_Object$assign3, 'direction', direction), (0, _defineProperty3.default)(_Object$assign3, 'velocity', velocity), (0, _defineProperty3.default)(_Object$assign3, 'acceleration', acceleration), _Object$assign3)), e);
         }
@@ -29503,6 +29502,7 @@ var EasedScroller = function (_Component) {
       var currentPos = this.props[orientation];
       var direction = this.state.direction;
       var acceleration = this.state.acceleration;
+      if (acceleration === 1) return currentPos;
       var distance = 0.5 * Math.abs(acceleration) * Math.pow(this.props.easeDuration, 2);
       return currentPos + direction * distance;
     }
