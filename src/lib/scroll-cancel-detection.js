@@ -1,4 +1,4 @@
-export class ScrollCancelDetection {
+export default class ScrollCancelDetection {
   constructor() {
     this.callback = null;
     this.doc = null;
