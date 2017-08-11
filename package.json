@@ -22,6 +22,6 @@
   },
   "scripts": {
     "compile": "babel -d ./ src/",
-    "prepublish": "npm run compile"
+    "prepublishOnly": "npm run compile"
   }
 }
