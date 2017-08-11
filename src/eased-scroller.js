@@ -99,6 +99,7 @@ export default class EasedScroller extends Component {
     const currentPos = this.props[orientation];
     const direction = this.state.direction;
     const acceleration = this.state.acceleration;
+    if (acceleration === 1) return currentPos;
     const distance = 0.5 * Math.abs(acceleration) * Math.pow(this.props.easeDuration, 2);
     return currentPos + (direction * distance);
   }
