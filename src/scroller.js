@@ -72,6 +72,7 @@ export default class Scroller extends Component {
     doc.removeEventListener('mousemove', this.handleScrollMove);
     doc.removeEventListener('touchend', this.handleScrollEnd, true);
     doc.removeEventListener('mouseup', this.handleScrollEnd, true);
+    this.doc = null;
 
     this.callHandler('onScrollEnd', {
       x: this.props.x,
