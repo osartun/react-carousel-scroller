@@ -210,7 +210,9 @@ export default class CarouselScroller extends Component {
 
 CarouselScroller.propTypes = {
   orientation: PropTypes.oneOf(['x', 'y']),
+  tagName: PropTypes.string,
   index: PropTypes.number,
+  className: PropTypes.string,
   onChange: PropTypes.func,
   onEnd: PropTypes.func,
   withStyle: PropTypes.bool,
