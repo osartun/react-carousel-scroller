@@ -69,10 +69,12 @@ export default class CarouselScroller extends Component {
   }
 
   setScrollerRef(comp) {
-    this.el = {
-      scroller: comp.el,
-      container: comp.el.parentElement,
-    };
+    if (comp) {
+      this.el = {
+        scroller: comp.el,
+        container: comp.el.parentElement,
+      };
+    }
   }
 
   updateBounds() {
