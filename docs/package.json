@@ -8,8 +8,9 @@
   "scripts": {
     "compile-scroller": "cd .. && npm run compile && cd docs",
     "copy-scroller": "mkdir -p js/src && cd .. && cp ./*scroller.js docs/js/src && cd docs",
+    "copy-lib": "mkdir -p js/src/lib && cd .. && cp -r lib/ docs/js/src/lib/ && cd docs",
     "bundle": "./node_modules/.bin/webpack --config webpack.config.js",
-    "build": "npm run compile-scroller && npm run copy-scroller && npm run bundle"
+    "build": "npm run compile-scroller && npm run copy-scroller && npm run copy-lib && npm run bundle"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
