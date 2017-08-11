@@ -35,9 +35,7 @@ export default class EasedScroller extends Component {
   }
 
   setRefEl(comp) {
-    if (comp) {
-      this.el = comp.el;
-    }
+    this.el = comp ? comp.el : null;
   }
 
   handleScrollStart(pos, e) {
