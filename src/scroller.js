@@ -54,6 +54,10 @@ export default class Scroller extends Component {
   handleScrollMove(e) {
     if (e.touches && e.touches.length > 1) return;
 
+    if (e.buttons === 0) {
+      return this.handleScrollEnd(e);
+    }
+
     const { pageX, pageY } = (e.touches && e.touches[0]) || e;
 
     this.callHandler('onScroll', {
