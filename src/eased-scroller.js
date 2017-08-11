@@ -38,6 +38,7 @@ export default class EasedScroller extends Component {
   componentWillUnmount() {
     if (this.rafId) {
       raf.cancel(this.rafId);
+      this.rafId = 0;
     }
   }
 
