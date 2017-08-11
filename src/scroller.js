@@ -39,7 +39,7 @@ export default class Scroller extends Component {
       startRelY: this.props.y,
     });
 
-    const doc = this.el.ownerDocument;
+    const doc = this.doc = this.el.ownerDocument;
     doc.addEventListener('touchmove', this.handleScrollMove);
     doc.addEventListener('mousemove', this.handleScrollMove);
     doc.addEventListener('touchend', this.handleScrollEnd, true);
@@ -54,6 +54,10 @@ export default class Scroller extends Component {
   handleScrollMove(e) {
     if (e.touches && e.touches.length > 1) return;
 
+    if (e.buttons === 0) {
+      return this.handleScrollEnd(e);
+    }
+
     const { pageX, pageY } = (e.touches && e.touches[0]) || e;
 
     this.callHandler('onScroll', {
@@ -63,11 +67,12 @@ export default class Scroller extends Component {
   }
 
   handleScrollEnd(e) {
-    const doc = this.el.ownerDocument;
+    const doc = this.doc;
     doc.removeEventListener('touchmove', this.handleScrollMove);
     doc.removeEventListener('mousemove', this.handleScrollMove);
     doc.removeEventListener('touchend', this.handleScrollEnd, true);
     doc.removeEventListener('mouseup', this.handleScrollEnd, true);
+    this.doc = null;
 
     this.callHandler('onScrollEnd', {
       x: this.props.x,

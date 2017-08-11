@@ -20,6 +20,7 @@ export default class EasedScroller extends Component {
       acceleration: 0,
     };
     this.el = null;
+    this.rafId = 0;
     this.setRefEl = this.setRefEl.bind(this);
     this.handleScrollStart = this.handleScrollStart.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -34,8 +35,15 @@ export default class EasedScroller extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.rafId) {
+      raf.cancel(this.rafId);
+      this.rafId = 0;
+    }
+  }
+
   setRefEl(comp) {
-    this.el = comp.el;
+    this.el = comp ? comp.el : null;
   }
 
   handleScrollStart(pos, e) {
@@ -80,7 +88,8 @@ export default class EasedScroller extends Component {
     const orientation = this.props.orientation;
     const endPos = this.calcPosAoT();
     this.setState({ style: this.getStyle() });
-    raf(() => {
+    this.rafId = raf(() => {
+      this.rafId = 0;
       if (typeof this.props.onScrollEnd === 'function') {
         const { direction, velocity, acceleration } = this.state;
         this.props.onScrollEnd(Object.assign({}, pos, {
