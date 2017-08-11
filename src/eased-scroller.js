@@ -58,14 +58,14 @@ export default class EasedScroller extends Component {
     const lineDelta = pos[orientation] - this.props[orientation];
     const velocity = lineDelta / timeDelta; // px per millisecond
     const acceleration = (velocity - this.state.velocity) / Math.pow(timeDelta, 2);
+    const direction = Math.sign(lineDelta);
     this.setState({
-      direction: Math.sign(lineDelta),
+      direction,
       timestamp,
       velocity,
       acceleration,
     });
     if (typeof this.props.onScroll === 'function') {
-      const { direction, velocity, acceleration } = this.state;
       this.props.onScroll(Object.assign({}, pos, {
         [orientation]: pos[orientation],
         direction,
