@@ -1,4 +1,4 @@
-export class WindowLeaveDetection {
+export class ScrollCancelDetection {
   constructor() {
     this.callback = null;
     this.doc = null;
