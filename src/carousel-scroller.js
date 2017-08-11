@@ -197,6 +197,7 @@ export default class CarouselScroller extends Component {
       x,
       y,
       orientation: this.props.orientation,
+      tagName: this.props.tagName,
       className: this.getClassName(),
       ref: this.setScrollerRef,
       onScrollStart: this.handleScrollStart,
