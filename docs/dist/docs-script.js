@@ -28562,6 +28562,7 @@ var Showcase = function (_Component) {
       orientation: 'x',
       index: 0,
       isDiffSize: false,
+      isPageScrollPrevented: false,
       listener: 'basic'
     };
     _this.onChangeOption = _this.onChangeOption.bind(_this);
@@ -28669,7 +28670,7 @@ var CodeOutput = function CodeOutput(props) {
     _react2.default.createElement(
       'code',
       null,
-      '\n<div className="container ' + (props.orientation === 'x' ? 'horizontal' : 'vertical') + '" style={{\n  position: \'relative\',\n  overflow: \'hidden\', ' + (props.orientation === 'x' ? '\n  height: \'100px\',\n  width: \'100%\'' : '\n  height: \'300px\',\n  width: \'100px\'') + '\n}}>\n  <CarouselScroller\n    index={' + props.index + '}\n    orientation={' + props.orientation + '}\n    className="scroller" ' + (props.listener !== 'none' ? '\n    onChange={onChangeHandler}\n      ' : '') + '\n  >\n    {_.times(' + props.nrOfItems + ').map(() => (\n      <div className="item" ' + (props.isDiffSize ? 'style={{ width: getWidth(\u2026) }} ' : '') + '/>\n    ))}\n  </CarouselScroller>\n</div>\n      '
+      '\n<div className="container ' + (props.orientation === 'x' ? 'horizontal' : 'vertical') + '" style={{\n  position: \'relative\',\n  overflow: \'hidden\', ' + (props.orientation === 'x' ? '\n  height: \'100px\',\n  width: \'100%\'' : '\n  height: \'300px\',\n  width: \'100px\'') + '\n}}>\n  <CarouselScroller\n    index={' + props.index + '}\n    orientation={' + props.orientation + '}\n    className="scroller" ' + (props.listener !== 'none' ? '\n    onChange={onChangeHandler}' : '') + ' ' + (props.isPageScrollPrevented ? '\n    preventPageScroll' : '') + '\n  >\n    {_.times(' + props.nrOfItems + ').map(() => (\n      <div className="item" ' + (props.isDiffSize ? 'style={{ width: getWidth(\u2026) }} ' : '') + '/>\n    ))}\n  </CarouselScroller>\n</div>\n      '
     )
   );
 };
@@ -28723,6 +28724,7 @@ var OptionInput = function (_Component) {
     _this.onChangeOrientation = _this.onChangeOrientation.bind(_this);
     _this.onChangeIndex = _this.onChangeIndex.bind(_this);
     _this.onToggleDiffSize = _this.onToggleDiffSize.bind(_this);
+    _this.onTogglePageScroll = _this.onTogglePageScroll.bind(_this);
     _this.onChangeListener = _this.onChangeListener.bind(_this);
     return _this;
   }
@@ -28753,6 +28755,13 @@ var OptionInput = function (_Component) {
     value: function onToggleDiffSize(e) {
       this.props.onChange(_extends({}, this.props, {
         isDiffSize: e.target.checked
+      }));
+    }
+  }, {
+    key: 'onTogglePageScroll',
+    value: function onTogglePageScroll(e) {
+      this.props.onChange(_extends({}, this.props, {
+        isPageScrollPrevented: e.target.checked
       }));
     }
   }, {
@@ -28857,6 +28866,21 @@ var OptionInput = function (_Component) {
                 onChange: this.onToggleDiffSize
               }),
               'Different sizes'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: _optionInput2.default.wrapper },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: labelFor('preventPageScroll') },
+              _react2.default.createElement('input', {
+                id: labelFor('preventPageScroll'),
+                type: 'checkbox',
+                value: this.props.isPageScrollPrevented,
+                onChange: this.onTogglePageScroll
+              }),
+              'Prevent page scroll'
             )
           )
         ),
@@ -28967,7 +28991,8 @@ var ShowcaseScroller = function ShowcaseScroller(props) {
         index: props.index,
         orientation: props.orientation,
         className: _showcaseScroller2.default.scroller,
-        onChange: props.onChange
+        onChange: props.onChange,
+        preventPageScroll: props.isPageScrollPrevented
       },
       _.times(props.nrOfItems).map(function (u, i) {
         return _react2.default.createElement('div', {
@@ -29131,10 +29156,10 @@ var CarouselScroller = function (_Component) {
   }, {
     key: 'setScrollerRef',
     value: function setScrollerRef(comp) {
-      this.el = {
+      this.el = comp ? {
         scroller: comp.el,
         container: comp.el.parentElement
-      };
+      } : {};
     }
   }, {
     key: 'updateBounds',
@@ -29301,7 +29326,8 @@ var CarouselScroller = function (_Component) {
         onScrollStart: this.handleScrollStart,
         onScroll: this.handleScroll,
         onScrollEnd: this.handleScrollEnd,
-        style: this.getStyle()
+        style: this.getStyle(),
+        preventPageScroll: this.props.preventPageScroll
       }, this.props.children);
     }
   }]);
@@ -29317,7 +29343,8 @@ CarouselScroller.propTypes = {
   className: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onEnd: _propTypes2.default.func,
-  withStyle: _propTypes2.default.bool
+  withStyle: _propTypes2.default.bool,
+  preventPageScroll: _propTypes2.default.bool
 };
 
 CarouselScroller.defaultProps = {
@@ -29416,6 +29443,7 @@ var EasedScroller = function (_Component) {
       acceleration: 0
     };
     _this.el = null;
+    _this.rafId = 0;
     _this.setRefEl = _this.setRefEl.bind(_this);
     _this.handleScrollStart = _this.handleScrollStart.bind(_this);
     _this.handleScroll = _this.handleScroll.bind(_this);
@@ -29432,9 +29460,17 @@ var EasedScroller = function (_Component) {
       }
     }
   }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.rafId) {
+        _raf2.default.cancel(this.rafId);
+        this.rafId = 0;
+      }
+    }
+  }, {
     key: 'setRefEl',
     value: function setRefEl(comp) {
-      this.el = comp.el;
+      this.el = comp ? comp.el : null;
     }
   }, {
     key: 'handleScrollStart',
@@ -29481,7 +29517,8 @@ var EasedScroller = function (_Component) {
       var orientation = this.props.orientation;
       var endPos = this.calcPosAoT();
       this.setState({ style: this.getStyle() });
-      (0, _raf2.default)(function () {
+      this.rafId = (0, _raf2.default)(function () {
+        _this2.rafId = 0;
         if (typeof _this2.props.onScrollEnd === 'function') {
           var _Object$assign3;
 
@@ -29657,11 +29694,16 @@ var Scroller = function (_Component) {
         startRelY: this.props.y
       });
 
-      var doc = this.el.ownerDocument;
+      var doc = this.doc = this.el.ownerDocument;
       doc.addEventListener('touchmove', this.handleScrollMove);
       doc.addEventListener('mousemove', this.handleScrollMove);
       doc.addEventListener('touchend', this.handleScrollEnd, true);
       doc.addEventListener('mouseup', this.handleScrollEnd, true);
+
+      if (this.props.preventPageScroll) {
+        this.prevOverflow = doc.body.style.overflow;
+        doc.body.style.overflow = 'hidden';
+      }
 
       this.callHandler('onScrollStart', {
         x: this.props.x,
@@ -29672,6 +29714,10 @@ var Scroller = function (_Component) {
     key: 'handleScrollMove',
     value: function handleScrollMove(e) {
       if (e.touches && e.touches.length > 1) return;
+
+      if (e.buttons === 0) {
+        return this.handleScrollEnd(e);
+      }
 
       var _ref2 = e.touches && e.touches[0] || e,
           pageX = _ref2.pageX,
@@ -29685,11 +29731,16 @@ var Scroller = function (_Component) {
   }, {
     key: 'handleScrollEnd',
     value: function handleScrollEnd(e) {
-      var doc = this.el.ownerDocument;
+      var doc = this.doc;
       doc.removeEventListener('touchmove', this.handleScrollMove);
       doc.removeEventListener('mousemove', this.handleScrollMove);
       doc.removeEventListener('touchend', this.handleScrollEnd, true);
       doc.removeEventListener('mouseup', this.handleScrollEnd, true);
+
+      if (this.props.preventPageScroll) {
+        doc.body.style.overflow = this.prevOverflow;
+      }
+      this.doc = null;
 
       this.callHandler('onScrollEnd', {
         x: this.props.x,
@@ -29784,6 +29835,7 @@ Scroller.propTypes = {
   onScrollStart: _propTypes2.default.func,
   onScroll: _propTypes2.default.func,
   onScrollEnd: _propTypes2.default.func,
+  preventPageScroll: _propTypes2.default.bool,
   x: _propTypes2.default.number,
   y: _propTypes2.default.number,
   disableOnWheel: _propTypes2.default.bool,

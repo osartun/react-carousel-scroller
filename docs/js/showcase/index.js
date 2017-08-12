@@ -11,6 +11,7 @@ export default class Showcase extends Component {
       orientation: 'x',
       index: 0,
       isDiffSize: false,
+      isPageScrollPrevented: false,
       listener: 'basic'
     };
     this.onChangeOption = this.onChangeOption.bind(this);

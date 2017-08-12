@@ -45,6 +45,11 @@ export default class Scroller extends Component {
     doc.addEventListener('touchend', this.handleScrollEnd, true);
     doc.addEventListener('mouseup', this.handleScrollEnd, true);
 
+    if (this.props.preventPageScroll) {
+      this.prevOverflow = doc.body.style.overflow;
+      doc.body.style.overflow = 'hidden';
+    }
+
     this.callHandler('onScrollStart', {
       x: this.props.x,
       y: this.props.y,
@@ -72,6 +77,10 @@ export default class Scroller extends Component {
     doc.removeEventListener('mousemove', this.handleScrollMove);
     doc.removeEventListener('touchend', this.handleScrollEnd, true);
     doc.removeEventListener('mouseup', this.handleScrollEnd, true);
+
+    if (this.props.preventPageScroll) {
+      doc.body.style.overflow = this.prevOverflow;
+    }
     this.doc = null;
 
     this.callHandler('onScrollEnd', {
@@ -153,6 +162,7 @@ Scroller.propTypes = {
   onScrollStart: PropTypes.func,
   onScroll: PropTypes.func,
   onScrollEnd: PropTypes.func,
+  preventPageScroll: PropTypes.bool,
   x: PropTypes.number,
   y: PropTypes.number,
   disableOnWheel: PropTypes.bool,

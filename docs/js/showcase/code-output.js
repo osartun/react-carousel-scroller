@@ -19,9 +19,9 @@ const CodeOutput = (props) => (
     orientation={${props.orientation}}
     className="scroller" ${
       props.listener !== 'none' ? `
-    onChange={onChangeHandler}
-      ` : ''
-    }
+    onChange={onChangeHandler}` : ''} ${
+      props.isPageScrollPrevented ? `
+    preventPageScroll` : ''}
   >
     {_.times(${props.nrOfItems}).map(() => (
       <div className="item" ${

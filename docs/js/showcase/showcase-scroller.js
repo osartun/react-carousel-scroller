@@ -25,6 +25,7 @@ const ShowcaseScroller = (props) => (
       orientation={props.orientation}
       className={style.scroller}
       onChange={props.onChange}
+      preventPageScroll={props.isPageScrollPrevented}
     >
       {_.times(props.nrOfItems).map((u, i) => (
         <div
