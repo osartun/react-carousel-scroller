@@ -142,8 +142,7 @@ export default class Scroller extends Component {
   }
 
   render() {
-    const props = _.omit(this.props, ['tagName', 'x', 'y', 'onScrollStart',
-      'onScroll', 'onScrollEnd', 'disableOnWheel', 'wheelEndDelay']);
+    const props = _.omit(this.props, _.keys(Scroller.propTypes));
 
     return React.createElement(this.props.tagName, Object.assign({}, props,
       {

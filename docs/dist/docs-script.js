@@ -29813,7 +29813,7 @@ var Scroller = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var props = _lodash2.default.omit(this.props, ['tagName', 'x', 'y', 'onScrollStart', 'onScroll', 'onScrollEnd', 'disableOnWheel', 'wheelEndDelay']);
+      var props = _lodash2.default.omit(this.props, _lodash2.default.keys(Scroller.propTypes));
 
       return _react2.default.createElement(this.props.tagName, (0, _assign2.default)({}, props, {
         ref: this.setWrapperRef,
