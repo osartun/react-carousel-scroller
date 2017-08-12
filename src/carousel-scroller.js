@@ -204,6 +204,7 @@ export default class CarouselScroller extends Component {
       onScroll: this.handleScroll,
       onScrollEnd: this.handleScrollEnd,
       style: this.getStyle(),
+      preventPageScroll: this.props.preventPageScroll,
     }, this.props.children);
   }
 }
@@ -216,6 +217,7 @@ CarouselScroller.propTypes = {
   onChange: PropTypes.func,
   onEnd: PropTypes.func,
   withStyle: PropTypes.bool,
+  preventPageScroll: PropTypes.bool,
 };
 
 CarouselScroller.defaultProps = {
