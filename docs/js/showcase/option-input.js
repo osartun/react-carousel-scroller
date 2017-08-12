@@ -11,6 +11,7 @@ export default class OptionInput extends Component {
     this.onChangeOrientation = this.onChangeOrientation.bind(this);
     this.onChangeIndex = this.onChangeIndex.bind(this);
     this.onToggleDiffSize = this.onToggleDiffSize.bind(this);
+    this.onTogglePageScroll = this.onTogglePageScroll.bind(this);
     this.onChangeListener = this.onChangeListener.bind(this);
   }
 
@@ -39,6 +40,13 @@ export default class OptionInput extends Component {
     this.props.onChange({
       ...this.props,
       isDiffSize: e.target.checked
+    });
+  }
+
+  onTogglePageScroll(e) {
+    this.props.onChange({
+      ...this.props,
+      isPageScrollPrevented: e.target.checked
     });
   }
 
@@ -109,6 +117,17 @@ export default class OptionInput extends Component {
                 onChange={this.onToggleDiffSize}
               />
               Different sizes
+            </label>
+          </div>
+          <div className={css.wrapper}>
+            <label htmlFor={labelFor('preventPageScroll')}>
+              <input
+                id={labelFor('preventPageScroll')}
+                type="checkbox"
+                value={this.props.isPageScrollPrevented}
+                onChange={this.onTogglePageScroll}
+              />
+              Prevent page scroll
             </label>
           </div>
         </div>
